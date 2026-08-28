@@ -11,9 +11,9 @@ return {
     { "<C-e>", function() local h = require("harpoon") h.ui:toggle_quick_menu(h:list()) end, desc = "Harpoon menu" },
 
     { "<C-h>", function() require("harpoon"):list():select(1) end, desc = "Harpoon select 1" },
-    { "<C-t>", function() require("harpoon"):list():select(2) end, desc = "Harpoon select 2" },
-    { "<C-n>", function() require("harpoon"):list():select(3) end, desc = "Harpoon select 3" },
-    { "<C-s>", function() require("harpoon"):list():select(4) end, desc = "Harpoon select 4" },
+    { "<C-j>", function() require("harpoon"):list():select(2) end, desc = "Harpoon select 2" },
+    { "<C-k>", function() require("harpoon"):list():select(3) end, desc = "Harpoon select 3" },
+    { "<C-l>", function() require("harpoon"):list():select(4) end, desc = "Harpoon select 4" },
 
     -- Toggle previous & next buffers
     { "<C-S-P>", function() require("harpoon"):list():prev() end, desc = "Harpoon prev" },
