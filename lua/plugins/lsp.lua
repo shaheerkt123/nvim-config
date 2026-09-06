@@ -90,7 +90,27 @@ return {
 
 			-- LSP Servers
 			local servers = {
-                lua_ls = {},
+				lua_ls = {
+					settings = {
+						Lua = {
+							runtime = {
+								version = "LuaJIT",
+							},
+							diagnostics = {
+								globals = { "vim" },
+							},
+							workspace = {
+								checkThirdParty = false,
+								library = {
+									vim.env.VIMRUNTIME,
+								},
+							},
+							telemetry = {
+								enable = false,
+							},
+						},
+					},
+				},
 				gopls = {},
 				rust_analyzer = {
 					settings = {
@@ -100,6 +120,22 @@ return {
 						},
 					},
 				},
+                clangd = {
+                    cmd = {
+                        "clangd",
+                        "--background-index",
+                        "--clang-tidy",
+                        "--header-insertion=iwyu",
+                        "--completion-style=detailed",
+                        "--function-arg-placeholders",
+                        "--fallback-style=llvm",
+                    },
+                    init_options = {
+                        usePlaceholders = true,
+                        completeUnimported = true,
+                        clangdFileStatus = true,
+                    },
+                },
 			}
 
 			for server, config in pairs(servers) do
