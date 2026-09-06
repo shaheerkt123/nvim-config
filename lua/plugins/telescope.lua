@@ -12,5 +12,6 @@ return {
         { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep (Search text)" },
         { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
         { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
+        { "<leader>fd", "<cmd>Telescope diagnostics<cr>", desc = "Find Diagnostics (Errors/Warnings)" },
     },
 }

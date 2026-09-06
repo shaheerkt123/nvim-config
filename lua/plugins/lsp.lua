@@ -29,6 +29,34 @@ return {
 				}),
 			})
 
+			-- Diagnostic Configuration (end-of-line text, icons, and popups)
+			vim.diagnostic.config({
+				virtual_text = {
+					prefix = "■", -- Square indicator at end of line
+					spacing = 4,
+					source = "if_many",
+				},
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "󰅚 ",
+						[vim.diagnostic.severity.WARN]  = "󰀪 ",
+						[vim.diagnostic.severity.HINT]  = "󰌶 ",
+						[vim.diagnostic.severity.INFO]  = "󰋽 ",
+					},
+				},
+				underline = true,
+				update_in_insert = false,
+				severity_sort = true,
+				float = {
+					focusable = false,
+					close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+					border = "rounded",
+					source = true,
+					header = "",
+					prefix = " ",
+				},
+			})
+
 			-- Keymaps to run when LSP attaches to a buffer
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(event)
@@ -41,8 +69,22 @@ return {
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
 					map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 					map("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
+					map("<leader>e", vim.diagnostic.open_float, "Show Diagnostic Popup")
 					map("[d", function() vim.diagnostic.jump({ count = -1 }) end, "Previous Diagnostic")
 					map("]d", function() vim.diagnostic.jump({ count = 1 }) end, "Next Diagnostic")
+				end,
+			})
+
+			-- Automatically open diagnostic popup on hover
+			vim.api.nvim_create_autocmd("CursorHold", {
+				callback = function()
+					vim.diagnostic.open_float(nil, {
+						focusable = false,
+						close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+						border = "rounded",
+						source = true,
+						prefix = " ",
+					})
 				end,
 			})
 
