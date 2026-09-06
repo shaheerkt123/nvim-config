@@ -1,8 +1,16 @@
 -- lua/plugins/rose-pine.lua
 return {
-	"rose-pine/neovim",
-	name = "rose-pine",
-	config = function()
-		vim.cmd("colorscheme rose-pine")
-	end
+    "rose-pine/neovim",
+    name = "rose-pine",
+    config = function()
+        require("rose-pine").setup({
+            styles = {
+                bold = true,
+                italic = true,
+                transparency = true, -- Enables background transparency
+            },
+        })
+
+        vim.cmd("colorscheme rose-pine")
+    end,
 }
